@@ -177,6 +177,7 @@ export class PostsService {
     const posts = await this.postModel
       .find(query)
       .populate('author', 'username profile.name profile.avatar isPrivate')
+      .populate('comments.user', 'username profile.name profile.avatar')
       .sort({ createdAt: -1 })
       .skip((page - 1) * limit)
       .limit(limit)
@@ -217,6 +218,7 @@ export class PostsService {
         ]
       })
       .populate('author', 'username profile.name profile.avatar isPrivate')
+      .populate('comments.user', 'username profile.name profile.avatar')
       .sort({ createdAt: -1 })
       .skip((page - 1) * limit)
       .limit(limit)
@@ -545,6 +547,7 @@ export class PostsService {
         visibility: 'public'
       })
       .populate('author', 'username profile.name profile.avatar isPrivate')
+      .populate('comments.user', 'username profile.name profile.avatar')
       .sort({ createdAt: -1 })
       .skip((page - 1) * limit)
       .limit(limit)
