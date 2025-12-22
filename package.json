@@ -1,0 +1,12 @@
+{
+  "name": "chatgram",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run start:dev"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

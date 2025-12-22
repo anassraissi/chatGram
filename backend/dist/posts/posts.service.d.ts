@@ -1,0 +1,31 @@
+import { Model } from 'mongoose';
+import { PostDocument } from './schemas/post.schema';
+import { CreatePostDto } from './dto/create-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
+import { CreateCommentDto } from './dto/comment.dto';
+import { UsersService } from '../users/users.service';
+import { NotificationsService } from '../notifications/notifications.service';
+export declare class PostsService {
+    private postModel;
+    private usersService;
+    private notificationsService?;
+    constructor(postModel: Model<PostDocument>, usersService: UsersService, notificationsService?: NotificationsService | undefined);
+    private extractHashtags;
+    private extractMentions;
+    createPost(userId: string, createPostDto: CreatePostDto): Promise<PostDocument>;
+    findById(postId: string, userId?: string): Promise<PostDocument>;
+    getUserPosts(userId: string, currentUserId?: string, page?: number, limit?: number): Promise<any>;
+    getFeed(userId: string, page?: number, limit?: number): Promise<any>;
+    toggleLike(postId: string, userId: string): Promise<any>;
+    addComment(postId: string, userId: string, commentDto: CreateCommentDto): Promise<any>;
+    toggleCommentLike(postId: string, commentIndex: number, userId: string): Promise<any>;
+    deleteComment(postId: string, commentIndex: number, userId: string): Promise<any>;
+    updatePost(postId: string, userId: string, updatePostDto: UpdatePostDto): Promise<PostDocument>;
+    deletePost(postId: string, userId: string): Promise<any>;
+    sharePost(postId: string, userId: string): Promise<any>;
+    toggleSave(postId: string, userId: string): Promise<any>;
+    getPostsByHashtag(hashtag: string, page?: number, limit?: number): Promise<any>;
+    getTrendingHashtags(limit?: number): Promise<any>;
+    toJSON(post: PostDocument, currentUserId?: string): any;
+    commentToJSON(comment: any, currentUserId?: string): any;
+}
